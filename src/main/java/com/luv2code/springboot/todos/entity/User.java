@@ -1,7 +1,10 @@
 package com.luv2code.springboot.todos.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.jspecify.annotations.Nullable;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -24,16 +27,18 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
+    @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private Date createdAt;
+    @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
     // allow to have multiple roles, e.g. Admin, Customer
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="user_authorities", joinColumns = @JoinColumn(name = "user_id"))
     private List<Authority> authorities;
-
-    // private List<Todo> todos;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Todo> todos;
 
     public User() { }
 
