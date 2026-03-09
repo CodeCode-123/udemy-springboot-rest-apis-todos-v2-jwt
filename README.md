@@ -7,4 +7,17 @@ Click the new Connection, Port: 3307, Database: mysql, Username: root, Password:
 Click Test Connection <br>
 Click Finish <br>
 Right-click the database and select View Database or View Diagram <br>
-Right-click the tables and select View Diagram or View Data
+Right-click the tables and select View Diagram or View Data <br>
+
+### Swagger-ui REST API testing
+* Open the Swagger UI through URL: http://localhost:8080/docs or http://localhost:8080/swagger-ui/index.html <br>
+* Log in with username (default: "user") and password (generated in the project console)
+* Test the Register a user POST method <br>
+URL: http://localhost:8080/api/auth/register <br>
+RequestBody:
+  {
+  "firstName": "Eric",
+  "lastName": "Roby",
+  "email": "eric@codingwithroby.com",
+  "password": "test1234!"
+  } <br>
