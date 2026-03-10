@@ -1,12 +1,11 @@
 package com.luv2code.springboot.todos.controller;
 
+import com.luv2code.springboot.todos.request.PasswordUpdateRequest;
 import com.luv2code.springboot.todos.response.UserResponse;
 import com.luv2code.springboot.todos.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name="User REST API Endpoints", description = "Operations related to info about current user")
 @RestController
@@ -26,5 +25,11 @@ public class UserController {
     @DeleteMapping
     public void deleteUser() {
         userService.deleteUser();
+    }
+
+    @PutMapping("/password")
+    public void passwordUpdate(@Valid @RequestBody PasswordUpdateRequest passwordUpdateRequest)
+            throws Exception {
+        userService.updatePassword(passwordUpdateRequest);
     }
 }
